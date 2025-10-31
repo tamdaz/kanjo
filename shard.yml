@@ -1,0 +1,21 @@
+name: model-athena-react
+version: 0.1.0
+
+authors:
+  - tamdaz <tamda.zohir.pro@gmail.com>
+
+dependencies:
+  athena:
+    github: athena-framework/framework
+    version: ~> 0.21.0
+  athena-spec:
+    github: athena-framework/spec
+    version: ~> 0.4.0
+
+targets:
+  server:
+    main: src/server.cr
+
+crystal: '>= 1.16.0'
+
+license: MIT
