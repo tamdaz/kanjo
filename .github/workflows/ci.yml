@@ -1,0 +1,32 @@
+name: ci
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/crystal-ameba/ameba:1.6.4
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: Check the code format
+        run: ameba
+  test:
+    needs: format
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal: ["1.16", "1.17", "1.18", latest, nightly]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+      - name: Run tests
+        run: crystal spec --order=random
