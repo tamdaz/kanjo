@@ -16,6 +16,6 @@ targets:
   server:
     main: src/server.cr
 
-crystal: '>= 1.16.0'
+crystal: '>= 1.18.0'
 
 license: MIT
