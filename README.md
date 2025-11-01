@@ -10,7 +10,10 @@
 > [!WARNING]
 > This project is experimental and not finished yet.
 
-Kanjo is a web application that allows users to keep a journal of their emotions. Specifically, users can rate their emotions based on the date and context. The advantage of this application is that it allows users to track their emotions over several months (or even years).
+Kanjo is a web application that allows users to keep a journal of their emotions.
+Specifically, users can rate their emotions based on the date and context.
+The advantage of this application is that it allows users to track their emotions over
+several months (or even years).
 
 ## Installation via Docker (GHCR)
 
@@ -32,7 +35,7 @@ Finally, go to the navigator: http://localhost:8000.
 
 ## Run from sources
 
-This installation method requires the Crystal 1.18.x compiler and Bun 1.3.x.
+This installation method requires the Crystal `1.18.x` compiler and Bun `1.3.x`.
 
 Backend (Crystal + Athena Framework):
 
@@ -50,11 +53,11 @@ bun install
 bun run dev
 ```
 
-In order for the front-end to communicate with the API, both must be started simultaneously.
+In order for the front-end to communicate with the API, both must be started.
 
 ## Unit tests
 
-When you contribute to a project, unit tests are essential to ensure that everything works properly.
+When you contribute to this project, unit tests are essential to ensure that everything works properly.
 
 ```cr
 crystal spec --progress --stats
