@@ -28,9 +28,14 @@ jobs:
         uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal }}
+      - name: Cache shards
+        uses: actions/cache@v4
+        with:
+          path: lib
+          key: ${{ runner.os }}-shards-${{ hashFiles('**/shard.lock') }}
       - name: Install necessary packages
         run: sudo apt install -y libmagic-dev
       - name: Install shards
-        run: shards install
+        run: shards check || shards install
       - name: Run tests
         run: crystal spec --order=random
