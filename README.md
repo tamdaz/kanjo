@@ -1,5 +1,12 @@
 # kanjo
 
+![license](https://img.shields.io/github/license/tamdaz/kanjo)
+![GitHub Release](https://img.shields.io/github/v/release/tamdaz/kanjo)
+![ci](https://github.com/tamdaz/kanjo/actions/workflows/ci.yml/badge.svg?branch=main)
+![commit activity](https://img.shields.io/github/commit-activity/m/tamdaz/kanjo)
+![issues](https://img.shields.io/github/issues/tamdaz/kanjo)
+![prs](https://img.shields.io/github/issues-pr/tamdaz/kanjo)
+
 > [!WARNING]
 > This project is experimental and not finished yet.
 
