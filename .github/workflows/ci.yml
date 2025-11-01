@@ -28,5 +28,7 @@ jobs:
         uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal }}
+      - name: Install shards
+        run: shards install
       - name: Run tests
         run: crystal spec --order=random
