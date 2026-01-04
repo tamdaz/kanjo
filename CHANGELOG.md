@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.1.2](https://github.com/tamdaz/kanjo/releases/tag/v0.1.2) - 2026-01-04
+
+### Fixed
+
+- Add OCI labels. Release 0.1.2 (@tamdaz)(#5)
+
 ## [v0.1.1](https://github.com/tamdaz/kanjo/releases/tag/v0.1.1) - 2026-01-04
 
 ### Fixed
