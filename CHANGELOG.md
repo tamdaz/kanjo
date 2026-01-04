@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Add the changelog for v0.1.1 (@tamdaz)(#4)
 - Rename the workflow to "deploy". Release v0.1.1 by (@tamdaz)(#3)
 - Rename "SaaS" to "web application" by (@tamdaz)(#2)
 
