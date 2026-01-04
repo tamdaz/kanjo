@@ -24,6 +24,9 @@ FROM codeberg.org/tamdaz/drift:0.3.6 AS drift
 
 FROM alpine:3.23 AS prod
 
+LABEL org.opencontainers.image.source="https://github.com/tamdaz/kanjo"
+LABEL org.opencontainers.image.description="A web application that stores the daily journals and assess emotions."
+
 WORKDIR /app
 
 COPY --from=build /app/bin/kanjo /app/bin/kanjo
