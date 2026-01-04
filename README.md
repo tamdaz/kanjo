@@ -8,7 +8,7 @@
 ![issues](https://img.shields.io/github/issues/tamdaz/kanjo)
 ![prs](https://img.shields.io/github/issues-pr/tamdaz/kanjo)
 
-kanjo _(japanese word)_ is a SaaS application that allows to write the emotion journal and assess your feelings in you daily life.
+kanjo _(japanese word)_ is a web application that allows to write the emotion journal and assess your feelings in you daily life.
 
 ![image overview](img/overview.png)
 

@@ -4,7 +4,7 @@ require "./listeners/**"
 require "./controllers/**"
 require "./repositories/**"
 
-# kanjo _(japanese word)_ is a SaaS application that allows to write the emotion journal and assess
+# kanjo _(japanese word)_ is a web application that allows to write the emotion journal and assess
 # your feelings in you daily life.
 # This tool helps you track and reflect on your emotions through daily journaling. Features include:
 # - Simple emotion logging
