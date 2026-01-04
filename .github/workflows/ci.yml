@@ -34,7 +34,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Install Crystal
       uses: crystal-lang/install-crystal@v1
-      with:
-        crystal: ${{ matrix.crystal }}
+    - name: Install Shards
+      run: shards install --production --without-development
     - name: Run tests
       run: crystal spec --order=random
