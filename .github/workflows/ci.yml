@@ -1,4 +1,8 @@
 name: ci
+
+env:
+  DATABASE_URL: sqlite3:data/db.sqlite3
+
 on:
   push:
     branches: [ "main" ]
@@ -42,7 +46,10 @@ jobs:
         tar xvf drift-0.3.6-x86_64-linux-musl.tar.gz && sudo mv drift /usr/local/bin/drift &&
         rm drift-0.3.6-x86_64-linux-musl.tar.gz
     - name: Migrate the database (sqlite)
-      run: mkdir data && touch data/db.sqlite3 && drift migrate --db sqlite3:data/db.sqlite3
+      run: |
+        mkdir data &&
+        touch data/db.sqlite3 &&
+        drift migrate --db $DATABASE_URL
     - name: Install Shards
       run: shards install --production --without-development      
     - name: Run tests
