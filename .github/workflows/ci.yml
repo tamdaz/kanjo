@@ -41,6 +41,8 @@ jobs:
         sudo wget https://github.com/luislavena/drift/releases/download/v0.3.6/drift-0.3.6-x86_64-linux-musl.tar.gz &&
         tar xvf drift-0.3.6-x86_64-linux-musl.tar.gz && sudo mv drift /usr/local/bin/drift &&
         rm drift-0.3.6-x86_64-linux-musl.tar.gz
+    - name: Migrate the database (sqlite)
+      run: mkdir data && touch data/db.sqlite3 && drift migrate --db sqlite3:data/db.sqlite3
     - name: Install Shards
       run: shards install --production --without-development      
     - name: Run tests
