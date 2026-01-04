@@ -1,0 +1,19 @@
+Documentation/Documentation:
+  Enabled: true
+  IgnoreDefs: false
+  IgnoreModules: false
+  Excluded:
+    - spec/**/*.cr
+
+Layout/LineLength:
+  Enabled: true
+  MaxLength: 100
+
+Lint/UselessAssign:
+  Enabled: true
+
+Lint/VoidOutsideLib:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: true

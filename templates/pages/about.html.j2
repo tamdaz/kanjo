@@ -1,0 +1,14 @@
+{% extends "layouts/base.html.j2" %}
+
+{% block title %}À propos{% endblock title %}
+
+{% block content %}
+  <h1 class="kanjo-page-title">À propos de Kanjo</h1>
+  
+  <h2>Informations débug :</h2>
+  <ul class="kanjo-info-list">
+    <li>Version de Kanjo : {{ kanjo_version() }}</li>
+    <li>Version de Crystal : {{ crystal_version() }}</li>
+    <li>Version de Athena : {{ athena_version() }}</li>
+  </ul>
+{% endblock content %}

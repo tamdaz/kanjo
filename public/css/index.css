@@ -1,0 +1,735 @@
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&family=Spline+Sans:wght@300..700&display=swap');
+
+:root {
+  font-family: "Spline Sans", sans-serif;
+  
+  /* Colors */
+  --background-color: #e0f2fe;
+  --primary-color: #075985;
+  --text-color: #0c4a6e;
+  --secondary-color: #38bdf8;
+  --danger-color: #dc2626;
+  --success-color: #16a34a;
+  --warning-color: #ea580c;
+  --card-bg: #fff;
+  --border-color: #7dd3fc;
+  --input-bg: #f0f9ff;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+body.kanjo-sky-color {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.kanjo-double-sidebar {
+  display: grid;
+  grid-template-columns: repeat(2, 300px) repeat(4, 1fr);
+  height: 100vh;
+}
+
+.kanjo-double-sidebar .kanjo-sidebar {
+  color: var(--background-color);
+}
+
+.kanjo-double-sidebar .kanjo-sidebar:first-child {
+  background-color: var(--text-color);
+}
+
+.kanjo-double-sidebar .kanjo-sidebar:nth-child(2) {
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Sidebar journals */
+.kanjo-sidebar-journals {
+  padding: 0;
+}
+
+.kanjo-sidebar-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.kanjo-sidebar-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.kanjo-sidebar-refresh {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: var(--transition-normal);
+  text-decoration: none;
+  color: inherit;
+}
+
+.kanjo-sidebar-refresh:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.kanjo-journals-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: var(--spacing-xs) 0;
+}
+
+.kanjo-journals-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kanjo-journals-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.kanjo-journals-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.kanjo-journals-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.kanjo-journal-emoji, .kanjo-journal-date-short {
+  font-size: 0.9rem;
+}
+
+.kanjo-empty-sidebar {
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.kanjo-journal-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+  color: inherit;
+  border-left: 3px solid transparent;
+}
+
+.kanjo-journal-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--secondary-color);
+}
+
+
+.kanjo-sidebar-item {
+  width: calc(100% - var(--spacing-md));
+  background-color: transparent;
+  color: var(--background-color);
+  border: 2px solid transparent;
+  padding: var(--spacing-md) var(--spacing-xl);
+  text-align: left;
+  font-size: 13pt;
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+.kanjo-sidebar-item:hover {
+  background-color: var(--primary-color);
+}
+
+.kanjo-sidebar-item:active {
+  opacity: 0.8;
+}
+
+.kanjo-square-logo {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  font-size: 46px;
+  aspect-ratio: 16 / 9;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kanjo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.kanjo-page-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Forms */
+.kanjo-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.kanjo-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.kanjo-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.kanjo-input, .kanjo-textarea {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition-normal);
+}
+
+.kanjo-input:focus, .kanjo-textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.kanjo-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: "Spline Sans Mono", monospace;
+  line-height: 1.6;
+}
+
+.kanjo-help-text {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.kanjo-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.kanjo-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+/* Buttons */
+.kanjo-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: inherit;
+}
+
+.kanjo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.kanjo-btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.kanjo-btn-primary:hover {
+  background-color: var(--text-color);
+}
+
+.kanjo-btn-secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.kanjo-btn-secondary:hover {
+  background-color: var(--primary-color);
+}
+
+.kanjo-btn-danger {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+.kanjo-btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+.kanjo-btn-small {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+.kanjo-form-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* Journal Cards Grid */
+.kanjo-journals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.kanjo-journal-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border: 2px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.kanjo-journal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.kanjo-journal-card.kanjo-readonly {
+  border-color: var(--warning-color);
+  opacity: 0.9;
+}
+
+.kanjo-journal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.kanjo-journal-emotion {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.kanjo-journal-date {
+  flex: 1;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.kanjo-badge {
+  background-color: var(--warning-color);
+  color: #fff;
+  padding: 4px var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.kanjo-journal-content {
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Spline Sans Mono", monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  max-height: 120px;
+}
+
+.kanjo-journal-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* Messages */
+.kanjo-message {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  margin: var(--spacing-lg) 0;
+  font-weight: 600;
+  animation: slideIn var(--transition-normal);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kanjo-message-success {
+  background-color: #dcfce7;
+  color: var(--success-color);
+  border: 2px solid var(--success-color);
+}
+
+.kanjo-message-error {
+  background-color: #fee2e2;
+  color: var(--danger-color);
+  border: 2px solid var(--danger-color);
+}
+
+/* Loading & Empty states */
+.kanjo-loading, .kanjo-empty, .kanjo-error {
+  text-align: center;
+  padding: 48px var(--spacing-lg);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  grid-column: 1 / -1;
+}
+
+.kanjo-error {
+  color: var(--danger-color);
+  background: var(--card-bg);
+  border: 2px solid var(--danger-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.kanjo-error h2 {
+  color: var(--danger-color);
+}
+
+/* Modal */
+.kanjo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.kanjo-modal-content {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn var(--transition-normal);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.kanjo-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--spacing-md);
+}
+
+.kanjo-modal-header h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.kanjo-modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-color);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-normal);
+}
+
+.kanjo-modal-close:hover {
+  background-color: var(--background-color);
+  color: var(--danger-color);
+}
+
+/* Info list */
+.kanjo-info-list {
+  list-style: none;
+}
+
+.kanjo-info-list li {
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-family: "Spline Sans Mono", monospace;
+}
+
+.kanjo-info-list li:last-child {
+  border-bottom: none;
+}
+
+/* Journal Show Page */
+.kanjo-journal-show {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kanjo-journal-loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.kanjo-journal-show .kanjo-journal-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.kanjo-journal-emotion {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.kanjo-journal-emoji {
+  font-size: 2rem;
+}
+
+.kanjo-journal-emotion-name {
+  font-size: 1.3rem;
+}
+
+.kanjo-journal-readonly {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--warning-color);
+  color: #fff;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.kanjo-journal-show .kanjo-journal-content {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.8;
+  max-height: none;
+  white-space: normal;
+}
+
+.kanjo-journal-content h1,
+.kanjo-journal-content h2,
+.kanjo-journal-content h3,
+.kanjo-journal-content h4,
+.kanjo-journal-content h5,
+.kanjo-journal-content h6 {
+  color: var(--primary-color);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.kanjo-journal-content h1:first-child,
+.kanjo-journal-content h2:first-child,
+.kanjo-journal-content h3:first-child {
+  margin-top: 0;
+}
+
+.kanjo-journal-content p {
+  margin-bottom: 1em;
+}
+
+.kanjo-journal-content ul,
+.kanjo-journal-content ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.kanjo-journal-content li {
+  margin-bottom: 0.5em;
+}
+
+.kanjo-journal-content code {
+  background: var(--input-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Spline Sans Mono", monospace;
+  font-size: 0.9em;
+}
+
+.kanjo-journal-content pre {
+  background: var(--input-bg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+.kanjo-journal-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.kanjo-journal-content blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding-left: var(--spacing-md);
+  margin: 1.5em 0;
+  color: var(--text-color);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.kanjo-journal-content a {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.kanjo-journal-content a:hover {
+  color: var(--primary-color);
+}
+
+.kanjo-journal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin: 1em 0;
+}
+
+.kanjo-journal-show .kanjo-journal-actions {
+  gap: var(--spacing-md);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .kanjo-double-sidebar {
+    grid-template-columns: 250px 250px repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .kanjo-double-sidebar {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .kanjo-double-sidebar .kanjo-sidebar {
+    display: none;
+  }
+  
+  .kanjo-journals-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .kanjo-page-title {
+    font-size: 2rem;
+  }
+  
+  .kanjo-journals-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .kanjo-form-actions {
+    flex-direction: column;
+  }
+  
+  .kanjo-form-actions .kanjo-btn {
+    width: 100%;
+  }
+}

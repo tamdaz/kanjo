@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+lib/
+
+# Build artifacts
+bin/
+*.o
+*.dwarf
+
+# Data
+data/
+*.sqlite3
+*.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+README.md
+LICENSE
+
+# CI/CD
+.github/
+
+# Crystal
+.crystal/
+shard.lock
