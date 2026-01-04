@@ -1,0 +1,18 @@
+version: '3'
+
+tasks:  
+  test:
+    dotenv: ['.env']
+    cmds:
+      - drift reset --db $DATABASE_URL
+      - drift migrate --db $DATABASE_URL
+      - crystal spec --progress --stats -Dtest
+  migrate:
+    dotenv: ['.env']
+    cmd: drift migrate --db $DATABASE_URL
+  dev:
+    dotenv: ['.env']
+    cmd: shards run kanjo --progress --stats
+  build:
+    dotenv: ['.env']
+    cmd: shards build kanjo --release --no-debug --progress --stats

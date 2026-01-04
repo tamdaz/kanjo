@@ -1,0 +1,56 @@
+name: ci
+
+env:
+  DATABASE_URL: sqlite3:data/db.sqlite3
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - src/**/*.cr
+      - spec/**/*.cr
+  pull_request:
+    paths:
+      - src/**/*.cr
+      - spec/**/*.cr
+  schedule:
+  - cron: '0 6 * * 6'
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/crystal-ameba/ameba:1.6.4
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: Check the code format
+        run: ameba
+  test:
+    needs: format
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal: [ "1.18", latest, nightly ]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download source
+      uses: actions/checkout@v4
+    - name: Install Crystal
+      uses: crystal-lang/install-crystal@v1
+    - name: Install Development Packages
+      run: sudo apt install -y libmagic-dev
+    - name: Install the migration tool (drift)
+      run: |
+        sudo wget https://github.com/luislavena/drift/releases/download/v0.3.6/drift-0.3.6-x86_64-linux-musl.tar.gz &&
+        tar xvf drift-0.3.6-x86_64-linux-musl.tar.gz && sudo mv drift /usr/local/bin/drift &&
+        rm drift-0.3.6-x86_64-linux-musl.tar.gz
+    - name: Migrate the database (sqlite)
+      run: |
+        mkdir data &&
+        touch data/db.sqlite3 &&
+        drift migrate --db $DATABASE_URL
+    - name: Install Shards
+      run: shards install --production --without-development      
+    - name: Run tests
+      run: crystal spec --order=random -Dtest

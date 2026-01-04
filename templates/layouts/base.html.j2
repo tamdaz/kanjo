@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>{% block title %}{% endblock title %} - Kanjo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  </head>
+  <body class="kanjo-sky-color">
+    <div class="kanjo-double-sidebar">
+      <nav class="kanjo-sidebar">
+        <div style="padding: 16px; padding-bottom: 32px;">
+          <div class="kanjo-square-logo">
+            <pre>[kanjo]</pre>
+          </div>
+        </div>
+        <a href="/journals" class="kanjo-sidebar-item">Mes journaux</a>
+        <a href="/" class="kanjo-sidebar-item">Créer un journal</a>
+        <a href="/about" class="kanjo-sidebar-item">À propos</a>
+      </nav>
+      <nav class="kanjo-sidebar kanjo-sidebar-journals">
+        <div class="kanjo-sidebar-header">
+          <h3>Mes Journaux</h3>
+          <a href="/journals" class="kanjo-sidebar-refresh" title="Voir tous les journaux">
+            <span class="material-symbols-outlined">auto_stories</span>
+          </a>
+        </div>
+        <div class="kanjo-journals-list">
+          {% if journals|length == 0 %}
+            <div class="kanjo-empty-sidebar">Aucun journal</div>
+          {% else %}
+            {% set emotion_data = {
+              'Happy': {'emoji': '😊'},
+              'Sad': {'emoji': '😢'},
+              'Angry': {'emoji': '😠'},
+              'Surprised': {'emoji': '😲'},
+              'Disappointed': {'emoji': '😞'},
+              'Anxious': {'emoji': '😰'},
+              'Calm': {'emoji': '😌'},
+              'Excited': {'emoji': '🤩'},
+              'Bored': {'emoji': '😑'}
+            } %}
+            {% for journal in journals|sort(attribute='date', reverse=true) %}
+              {% set emotion = emotion_data[journal.emotion] %}
+              <a href="/journals/{{ journal.date }}" class="kanjo-journal-item">
+                <span class="kanjo-journal-emoji">{{ emotion.emoji }}</span>
+                <span class="kanjo-journal-date-short">{{ journal.date }}</span>
+              </a>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </nav>
+      <aside style="padding: 16px 32px; grid-column: 3 / -1; overflow-y: scroll;">
+        {% block content %}{% endblock content %}
+      </aside>
+    </div>
+    
+    <script src="/js/app.js"></script>
+  </body>
+</html>

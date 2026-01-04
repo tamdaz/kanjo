@@ -1,0 +1,58 @@
+{% extends "layouts/base.html.j2" %}
+
+{% block title %}Journal du {{ journal.date }}{% endblock title %}
+
+{% block content %}
+  {% set emotion_data = {
+    'Happy': {'emoji': '😊', 'name': 'Heureux', 'color': '#FFD700'},
+    'Sad': {'emoji': '😢', 'name': 'Triste', 'color': '#4682B4'},
+    'Angry': {'emoji': '😠', 'name': 'En colère', 'color': '#DC143C'},
+    'Surprised': {'emoji': '😲', 'name': 'Surpris', 'color': '#FF69B4'},
+    'Disappointed': {'emoji': '😞', 'name': 'Déçu', 'color': '#A9A9A9'},
+    'Anxious': {'emoji': '😰', 'name': 'Anxieux', 'color': '#9370DB'},
+    'Calm': {'emoji': '😌', 'name': 'Calme', 'color': '#87CEEB'},
+    'Excited': {'emoji': '🤩', 'name': 'Excité', 'color': '#FF8C00'},
+    'Bored': {'emoji': '😑', 'name': 'Ennuyé', 'color': '#808080'}
+  } %}
+  {% set emotion = emotion_data[journal.emotion] %}
+
+  <div class="kanjo-journal-show">
+    <div class="kanjo-journal-header">
+      <div class="kanjo-journal-emotion" style="background-color: {{ emotion.color }}">
+        <span class="kanjo-journal-emoji">{{ emotion.emoji }}</span>
+        <span class="kanjo-journal-emotion-name">{{ emotion.name }}</span>
+      </div>
+      <div class="kanjo-journal-date">
+        {{ journal.date }}
+      </div>
+      {% if journal.readonly %}
+        <div class="kanjo-journal-readonly"><span class="material-symbols-outlined">lock</span> Lecture seule</div>
+      {% endif %}
+    </div>
+    
+    <div id="journal-content" class="kanjo-journal-content" data-markdown>{{ journal.content }}</div>
+    
+    <div class="kanjo-journal-actions">
+      <a href="/journals" class="kanjo-btn kanjo-btn-secondary">
+        ← Retour aux journaux
+      </a>
+      {% if not journal.readonly %}
+        <a href="/journals/{{ journal.date }}/edit" class="kanjo-btn kanjo-btn-primary">
+          <span class="material-symbols-outlined">edit</span> Modifier
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <script src="/js/marked.umd.js"></script>
+  <script>
+    // Parser le contenu Markdown uniquement
+    document.addEventListener('DOMContentLoaded', () => {
+      const contentElement = document.querySelector('[data-markdown]');
+      if (contentElement) {
+        const markdownContent = contentElement.textContent;
+        contentElement.innerHTML = marked.parse(markdownContent);
+      }
+    });
+  </script>
+{% endblock content %}

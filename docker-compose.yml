@@ -1,0 +1,18 @@
+services:
+  kanjo:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    # container_name: kanjo
+    image: tamdaz/kanjo:0.1.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - kanjo_data:/app/data
+    environment:
+      DATABASE_URL: sqlite3:data/db.sqlite3
+    restart: unless-stopped
+
+volumes:
+  kanjo_data:
+    driver: local
