@@ -39,4 +39,4 @@ jobs:
     - name: Install Shards
       run: shards install --production --without-development
     - name: Run tests
-      run: crystal spec --order=random
+      run: crystal spec --order=random --progress --stats -Dtest
