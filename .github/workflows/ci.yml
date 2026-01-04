@@ -36,7 +36,12 @@ jobs:
       uses: crystal-lang/install-crystal@v1
     - name: Install Development Packages
       run: sudo apt install -y libmagic-dev
+    - name: Install the migration tool (drift)
+      run: |
+        sudo wget https://github.com/luislavena/drift/releases/download/v0.3.6/drift-0.3.6-x86_64-linux-musl.tar.gz &&
+        tar xvf drift-0.3.6-x86_64-linux-musl.tar.gz && sudo mv drift /usr/local/bin/drift &&
+        rm drift-0.3.6-x86_64-linux-musl.tar.gz
     - name: Install Shards
-      run: shards install --production --without-development
+      run: shards install --production --without-development      
     - name: Run tests
-      run: crystal spec --order=random --progress --stats -Dtest
+      run: crystal spec --order=random -Dtest
