@@ -25,7 +25,8 @@ dependencies:
     version: ~> 0.22.0
   crinja:
     github: straight-shoota/crinja
-    version: ~> 0.8.0
+    commit: 5459c7c
+    # version: ~> 0.8.0
 
 targets:
   kanjo:
