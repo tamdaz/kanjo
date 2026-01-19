@@ -58,7 +58,7 @@ shards:
 
   crinja:
     git: https://github.com/straight-shoota/crinja.git
-    version: 0.8.1
+    version: 0.8.1+git.commit.5459c7c3ca640617c440d10e51768eddbd3f045a
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
