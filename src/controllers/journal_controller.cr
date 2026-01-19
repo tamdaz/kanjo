@@ -46,6 +46,13 @@ class Kanjo::Controllers::JournalController < ATH::Controller
   # Updates the journal by its date.
   def update(date : String, content : String,
              emotion : Kanjo::Enums::Emotions, readonly : Bool) : ATH::Response
+    # Verify that the journal is not readonly before updating
+    journal = @journal_repository.find(date)
+
+    if journal.readonly?
+      raise ATH::Exception::BadRequest.new("Cannot modify a readonly journal.")
+    end
+
     @journal_repository.update(date, content, readonly, emotion)
 
     ATH::Response.new({
