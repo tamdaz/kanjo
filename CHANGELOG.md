@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.1.3](https://github.com/tamdaz/kanjo/releases/tag/v0.1.3) - 2026-01-20
+
+### Fixed
+
+- Organize the Crinja template (@tamdaz)(#9)
+- Make the journal impossible to update when it's readonly (@tamdaz)(#8)
+- Refactor CSS, JS and Crinja code. (@tamdaz)(#7)
+- Bump the `straight-shoota/crinja` shard (@tamdaz)(#6)
+
 ## [v0.1.2](https://github.com/tamdaz/kanjo/releases/tag/v0.1.2) - 2026-01-04
 
 ### Fixed

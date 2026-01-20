@@ -12,7 +12,7 @@ require "./repositories/**"
 # - Data privacy
 module Kanjo
   # Version of Kanjo.
-  VERSION = "0.1.0"
+  VERSION = {{ `shards version`.stringify }}
 
   # Opens the database while Kanjo is on.
   class Database
