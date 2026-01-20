@@ -1,0 +1,65 @@
+{% extends "layouts/base.html.j2" %}
+
+{% block title %}Modifier le journal du {{ journal.date }}{% endblock title %}
+
+{% block content %}
+  {% set emotion_data = {
+    'Happy': {'emoji': '😊', 'name': 'Heureux', 'color': '#FFD700'},
+    'Sad': {'emoji': '😢', 'name': 'Triste', 'color': '#4682B4'},
+    'Angry': {'emoji': '😠', 'name': 'En colère', 'color': '#DC143C'},
+    'Surprised': {'emoji': '😲', 'name': 'Surpris', 'color': '#FF69B4'},
+    'Disappointed': {'emoji': '😞', 'name': 'Déçu', 'color': '#A9A9A9'},
+    'Anxious': {'emoji': '😰', 'name': 'Anxieux', 'color': '#9370DB'},
+    'Calm': {'emoji': '😌', 'name': 'Calme', 'color': '#87CEEB'},
+    'Excited': {'emoji': '🤩', 'name': 'Excité', 'color': '#FF8C00'},
+    'Bored': {'emoji': '😑', 'name': 'Ennuyé', 'color': '#808080'}
+  } %}
+
+  <div class="kanjo-journal-edit">
+    <h1 class="kanjo-page-title">Modifier le journal du {{ journal.date }}</h1>
+
+    <form id="journal-edit-form" class="kanjo-form" data-journal-date="{{ journal.date }}">
+      <div class="kanjo-form-group">
+        <label for="emotion" class="kanjo-label">Comment vous sentez-vous ? *</label>
+        <select id="emotion" name="emotion" class="kanjo-input" required>
+          {% for emotion_key, emotion_info in emotion_data %}
+            <option value="{{ emotion_key }}" {% if journal.emotion == emotion_key %}selected{% endif %}>
+              {{ emotion_info.emoji }} {{ emotion_info.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="kanjo-form-group">
+        <label for="content" class="kanjo-label">Contenu *</label>
+        <textarea
+          id="content"
+          name="content"
+          class="kanjo-input kanjo-textarea"
+          rows="15"
+          placeholder="Décrivez votre journée, vos émotions, vos pensées..."
+          required>{{ journal.content }}</textarea>
+        <small class="kanjo-help-text">Utilisez Markdown pour formater votre texte (gras, italique, listes, etc.)</small>
+      </div>
+
+      <div class="kanjo-form-group">
+        <label class="kanjo-checkbox-label">
+          <input type="checkbox" id="readonly" name="readonly" {% if journal.readonly %}checked{% endif %}>
+          <span>Marquer comme lecture seule (ne pourra plus être modifié)</span>
+        </label>
+      </div>
+
+      <div class="kanjo-form-actions">
+        <a href="/journals/{{ journal.date }}" class="kanjo-btn kanjo-btn-secondary">
+          Annuler
+        </a>
+        <button type="submit" class="kanjo-btn kanjo-btn-primary">
+          <span class="material-symbols-outlined">save</span>
+          Enregistrer les modifications
+        </button>
+      </div>
+    </form>
+
+    <div id="message" class="kanjo-message" style="display: none;"></div>
+  </div>
+{% endblock content %}
