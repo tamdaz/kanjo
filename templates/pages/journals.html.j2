@@ -5,7 +5,7 @@
 {% block content %}
   <div class="kanjo-header">
     <h1 class="kanjo-page-title">Mes Journaux</h1>
-    <button onclick="location.reload()" class="kanjo-btn kanjo-btn-secondary">
+    <button onclick="window.location.reload()" class="kanjo-btn kanjo-btn-secondary">
       <span class="material-symbols-outlined">refresh</span> Actualiser
     </button>
   </div>
@@ -71,52 +71,6 @@
     {% endif %}
   </div>
 
-  <!-- Modal pour éditer un journal -->
-  <div id="edit-modal" class="kanjo-modal">
-    <div class="kanjo-modal-content">
-      <div class="kanjo-modal-header">
-        <h2 id="modal-title">Éditer le journal</h2>
-        <button class="kanjo-modal-close" onclick="closeEditModal()">&times;</button>
-      </div>
-      
-      <form id="edit-form" class="kanjo-form">
-        <input type="hidden" id="edit-date">
-        
-        <div class="kanjo-form-group">
-          <label for="edit-emotion" class="kanjo-label">Émotion *</label>
-          <select id="edit-emotion" name="emotion" class="kanjo-input" required>
-            <option value="Happy">😊 Heureux</option>
-            <option value="Sad">😢 Triste</option>
-            <option value="Angry">😠 En colère</option>
-            <option value="Surprised">😲 Surpris</option>
-            <option value="Disappointed">😞 Déçu</option>
-            <option value="Anxious">😰 Anxieux</option>
-            <option value="Calm">😌 Calme</option>
-            <option value="Excited">🤩 Excité</option>
-            <option value="Bored">😑 Ennuyé</option>
-          </select>
-        </div>
-
-        <div class="kanjo-form-group">
-          <label for="edit-content" class="kanjo-label">Contenu *</label>
-          <textarea id="edit-content" name="content" class="kanjo-textarea" rows="12" required></textarea>
-        </div>
-
-        <div class="kanjo-form-group">
-          <label class="kanjo-checkbox-label">
-            <input type="checkbox" id="edit-readonly" name="readonly" class="kanjo-checkbox">
-            <span>Marquer comme lecture seule</span>
-          </label>
-        </div>
-
-        <div class="kanjo-form-actions">
-          <button type="submit" class="kanjo-btn kanjo-btn-primary">Mettre à jour</button>
-          <button type="button" class="kanjo-btn kanjo-btn-secondary" onclick="closeEditModal()">Annuler</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <div id="message-container"></div>
 
 <script>
@@ -124,24 +78,8 @@
     location.href = `/journals/${date}`;
   }
 
-  async function editJournal(date) {
-    try {
-      const journal = await getJournal(date);
-      
-      if (journal.readonly) {
-        showMessage('Ce journal est en lecture seule et ne peut pas être modifié', 'error');
-        return;
-      }
-      
-      document.getElementById('edit-date').value = journal.date;
-      document.getElementById('edit-emotion').value = journal.emotion;
-      document.getElementById('edit-content').value = journal.content;
-      document.getElementById('edit-readonly').checked = journal.readonly;
-      
-      document.getElementById('edit-modal').style.display = 'flex';
-    } catch (error) {
-      showMessage('Erreur lors de la récupération du journal', 'error');
-    }
+  function editJournal(date) {
+    location.href = `/journals/${date}/edit`;
   }
 
   function closeEditModal() {
@@ -191,14 +129,6 @@
     setTimeout(() => {
       messageDiv.remove();
     }, 5000);
-  }
-
-  // Fermer le modal en cliquant à l'extérieur
-  window.onclick = function(event) {
-    const modal = document.getElementById('edit-modal');
-    if (event.target === modal) {
-      closeEditModal();
-    }
   }
 </script>
 {% endblock content %}
