@@ -56,11 +56,7 @@ formatter = Log::Formatter.new do |entry, io|
   end
 end
 
-{% if flag?(:release) %}
-  Log.setup(:debug, Log::IOBackend.new(formatter: formatter))
-{% else %}
-  Log.setup(:debug, Log::IOBackend.new(formatter: formatter))
-{% end %}
+Log.setup(:debug, Log::IOBackend.new(formatter: formatter))
 
 {% unless flag?(:test) %}
   # Start the Athena server.

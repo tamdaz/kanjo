@@ -150,3 +150,59 @@ function isValidJournalDate(dateString) {
   
   return date <= today;
 }
+
+/**
+ * Initializes the journal edit form.
+ */
+function initJournalEditForm() {
+  const form = document.getElementById('journal-edit-form');
+  const messageDiv = document.getElementById('message');
+  
+  if (!form)
+    return;
+  
+  const date = form.dataset.journalDate;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    
+    // Convert checkbox value to proper format
+    if (formData.get('readonly') === 'on')
+      formData.set('readonly', 'true');
+    else
+      formData.set('readonly', 'false');
+
+    try {
+      const response = await fetch(`/api/journals/update/${date}`, {
+        method: 'PUT',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        messageDiv.textContent = 'Journal modifié avec succès !';
+        messageDiv.className = 'kanjo-message kanjo-message-success';
+        messageDiv.style.display = 'block';
+
+        // Redirect to journal show page after 1.5 seconds
+        setTimeout(() => {
+          window.location.href = `/journals/${date}`;
+        }, 1500);
+      } else {
+        throw new Error(result.message || 'Erreur lors de la modification du journal');
+      }
+    } catch (error) {
+      messageDiv.textContent = error.message;
+      messageDiv.className = 'kanjo-message kanjo-message-error';
+      messageDiv.style.display = 'block';
+    }
+  });
+}
+
+if (document.readyState === 'loading')
+  document.addEventListener('DOMContentLoaded', initJournalEditForm);
+else
+  initJournalEditForm();
